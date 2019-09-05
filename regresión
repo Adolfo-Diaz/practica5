@@ -1,0 +1,44 @@
+x = c(50,50,80,80,110,110,140,140,170,170)
+y = c(17052,14063,26264,19600,21952,26362,26362,26752,31654,32928)
+
+plot(x,y)
+
+sxx=sum((x-mean(x))^2)
+sxy=sum((x-mean(x))*(y-mean(y)))
+
+sc2 = ((sum(y))^2)/length(y)
+sc1 = sum(y^2)
+sst = sc1-sc2
+
+yi=b0+b1*x
+residuo=y-yi
+sse = sum(residuo^2)
+
+b1=(sxy)/(sxx)
+b0 <- mean (y)- b1*mean(x)
+
+r2 = 1-(sse/sst)
+
+s2 = sse/(length(x)-2) #desv. estandar
+
+s = sqrt(s2)/sqrt(sxx)
+
+n = length(x)
+n
+
+intconfp = b1+2.3060*s
+intconfn = b1-2.3060*s
+
+qt ( (p=.95+(.05)/2), df=8, lower.tail =TRUE)#PAARA SACAR
+#EL ESTADÍSTICO DE T
+
+#Con un alto grado de confianza 
+#se estima que un aumento en y de entre 77.8952 y 169.3847
+#se asocia con un incremento en x de 1
+
+model = lm(y~x)
+model
+summary(model)
+
+#sxx=18000 sxy=2225520 sst=331829752.9 s=19.837
+#b1=123.64 b0=10698.5 sse=56666460.099999 r2=.829
